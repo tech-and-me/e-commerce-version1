@@ -36,8 +36,25 @@ th{
         height: 160px!important;
     }
     .card-title{
+        font-size: 0.9rem;
+    }
+
+    tfoot td{
         font-size: 1rem;
     }
+
+} 
+
+
+@media (max-width: 992px){
+    .card-title{
+        font-size: 0.8rem;
+    }
+
+    tfoot td{
+        font-size: 0.7rem;
+    }
+
 } 
 
 
@@ -48,4 +65,9 @@ th{
     .card-title{
         font-size:1rem;
     }
+
+    tfoot td{
+        font-size: 0.5rem;
+    }
+
 }
