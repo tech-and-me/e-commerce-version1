@@ -107,9 +107,7 @@ const handleAddToBasket = () => {
             }
 
             basket.push(obj);
-            basket.map((elm,index)=>{
-                elm.amount = elm.productQuantity * elm.productPrice;
-            })
+            
         } 
     });
 
@@ -129,12 +127,17 @@ const handleAddToBasket = () => {
 
 const generateProductOrderedHtml = (basket) => {
     totalAmount = 0;
+    // calculate total amount of each product
+    basket.map((elm,index)=>{
+        elm.amount = elm.productQuantity * elm.productPrice;
+    })
 
-    // calculate total amount 
+    // calculate total amount for the whole basket
     basket.forEach(obj => {
         totalAmount += obj.amount; 
     });
     console.log("Total amount of order details is : " , totalAmount);
+
 
     let proOrderedHtml = "";
     basket.forEach((obj,index) => {
@@ -145,7 +148,12 @@ const generateProductOrderedHtml = (basket) => {
                         <td>${obj.productQuantity}</td>
                         <td><span>$</span>${obj.productPrice}</td>
                         <td><span>$</span>${obj.amount}</td>
-                        <td><span class="text-danger remove btn" onclick="deleteProductOrdered(${index})">Remove</span></td>
+                        <td colspan="2">
+                            <span class="text-danger remove px-2 " onclick="deleteProductOrdered(${index})">
+                            <i class="fa-solid fa-trash-can "></i>
+                            </span>
+                            <span class="text-danger edit" onclick="editProductOrdered(${index})" ><i class="fa-solid fa-pencil"></i></span>                
+                        </td>
                     </tr>
                 `         
     });
@@ -163,6 +171,12 @@ const deleteProductOrdered = (index) => {
     renderOrderDetails(generateProductOrderedHtml(basket));
 } 
 
+const editProductOrdered = (index) => {
+    let qty = prompt("Enter the new qty here: ");
+    qty = Number(qty);
+    basket[index].productQuantity = qty;
+    renderOrderDetails(generateProductOrderedHtml(basket));
+} 
 
 // ******************************Invoke Functions *****************************
 
