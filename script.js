@@ -1,4 +1,3 @@
-
 // ******************************Product Array *****************************
 const productArray =[
     {
@@ -59,13 +58,16 @@ const productArray =[
     }
 ]
 
-let basket = [];
-let totalAmount = 0;
+// *************************** Global Variable *************************
 
-// ******************************Functions *****************************
-const generateProductsHtml = (displayList) => {
+let basket = [];
+// let totalAmount = 0;
+
+// ******************************* Functions *****************************
+
+const renderProductList = (productArray) => {
     let htmlElements="";
-    displayList.forEach(obj => {
+    productArray.forEach(obj => {
     htmlElements += `
                 <div class= "col col-12 col-sm-6 col-md-4 col-lg-3 gy-5 card-item text-center">
                 <div class="card" id=${obj.productID}>
@@ -83,18 +85,15 @@ const generateProductsHtml = (displayList) => {
             </div>
         ` 
     })
-        return htmlElements;
-    };
-
-const renderProductList = (htmlElms) => {
-    const displayElm = document.getElementById("productsDisplaySection");
-    displayElm.innerHTML = htmlElms;
+    
+    document.getElementById("productsDisplaySection").innerHTML = htmlElements;
 }
 
+// ***********************Handle when added to basket clicked ***********************
 const handleAddToBasket = () => {
-   const quantityElms = document.querySelectorAll(".quantity");
 
-//  1. Adding products to basket
+    //  1. Adding products to basket
+    const quantityElms = document.querySelectorAll(".quantity");
     quantityElms.forEach((qtyElm,index) => {
         
         if (qtyElm.value >0){
@@ -102,7 +101,7 @@ const handleAddToBasket = () => {
                 productID: productArray[index].productID,
                 productName:productArray[index].productName,
                 productQuantity:+qtyElm.value,
-                productPrice : +productArray[index].unitPrice,
+                unitPrice : +productArray[index].unitPrice,
                 amount : 0
             }
             basket.push(obj);
@@ -110,13 +109,10 @@ const handleAddToBasket = () => {
         } 
     });
 
-//  2. convert products in basket to html elements
-    const proOrderedHtml = generateProductOrderedHtml(basket);
+// 4. invoke render function
+    renderOrderDetails(); 
 
-//3. render order details
-    renderOrderDetails(proOrderedHtml);     
-// clear form
-
+// 5.clear form
     const inputFields = document.querySelectorAll('input');
     inputFields.forEach(element => {
         element.value = null;   
@@ -124,29 +120,32 @@ const handleAddToBasket = () => {
 }
 
 
-const generateProductOrderedHtml = (basket) => {
-    totalAmount = 0;
-    // calculate total amount of each product
-    basket.map((elm,index)=>{
-        elm.amount = elm.productQuantity * elm.productPrice;
+// ***********************Render order details***********************
+const renderOrderDetails = () => {
+
+    // Note: I choose to include calculate amount codes here so that everytime this method is called, the amount would be updated even when delete or edit products. 
+
+    //  1. calculate total amount of each product ordered 
+    basket.map((basketObj,index)=>{
+        basketObj.amount = basketObj.productQuantity * basketObj.unitPrice;
     })
 
-    // calculate total amount for the whole basket
-    basket.forEach(obj => {
-        totalAmount += obj.amount; 
+    // 2. calculate total amount of the whole basket    
+    let totalAmount = 0;  // reset total amount back to zero before doing any calculation
+    basket.forEach(basketObj => {
+        totalAmount += basketObj.amount; 
     });
-    console.log("Total amount of order details is : " , totalAmount);
 
-
-    let proOrderedHtml = "";
-    basket.forEach((obj,index) => {
-        proOrderedHtml +=    
+    // 3. Generate html elements to render to order details section
+    let productsOrderedHtml = "";
+    basket.forEach((basketObj,index) => {
+        productsOrderedHtml +=    
                 `
-                    <tr id="${obj.id}">
-                        <td>${obj.productName}</td>
-                        <td>${obj.productQuantity}</td>
-                        <td><span>$</span>${obj.productPrice}</td>
-                        <td><span>$</span>${obj.amount}</td>
+                    <tr id="${basketObj.id}">
+                        <td>${basketObj.productName.split(" ")[0]}</td>
+                        <td>${basketObj.productQuantity}</td>
+                        <td><span>$</span>${basketObj.unitPrice}</td>
+                        <td><span>$</span>${basketObj.amount}</td>
                         <td colspan="2">
                             <span class="text-danger remove px-2 " onclick="deleteProductOrdered(${index})">
                             <i class="fa-solid fa-trash-can "></i>
@@ -157,37 +156,37 @@ const generateProductOrderedHtml = (basket) => {
                 `         
     });
 
-    return proOrderedHtml;
-}
-
-const renderOrderDetails = (htmlElms) => {
-    document.getElementById("tbody").innerHTML = htmlElms;
+    //4. render order details 
+    document.getElementById("tbody").innerHTML = productsOrderedHtml;
     document.getElementById("total").innerHTML = totalAmount;
 }
 
+
+// ***********************Handle when product deleted***********************
+// note: code for invoke this function is attached with OnClick 
 const deleteProductOrdered = (index) => {
     basket.splice(index,1);
-    renderOrderDetails(generateProductOrderedHtml(basket));
-} 
+    renderOrderDetails();
+}
 
+// ***********************Handle when product edited***********************
+// note: code for invoke this function is attached with OnClick 
 const editProductOrdered = (index) => {
     let qty = prompt("Enter the new qty here: ");
     qty = Number(qty);
     if (qty >=1){
         basket[index].productQuantity = qty;
-    renderOrderDetails(generateProductOrderedHtml(basket));
+    renderOrderDetails();
     }else{
         alert("Qty cannot be lessor than 1. Pls try again.")
         editProductOrdered(index);
-    }
-    
+    }    
 } 
 
 // ******************************Invoke Functions *****************************
 
 // render product array when page loaded 
-const htmlElements = generateProductsHtml(productArray);
-renderProductList(htmlElements);
+renderProductList(productArray);
 
 
 

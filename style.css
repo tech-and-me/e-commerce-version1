@@ -13,6 +13,10 @@ body{
     min-width: 100%!important;
 }
 
+tr td{
+    font-size: 0.8rem!important;
+}
+
 .section1{
     min-height: 80vh;
 }
@@ -64,6 +68,10 @@ footer img{
         font-size: 0.8rem;
     }
 
+    tr td{
+        font-size: 0.7rem!important;
+    }
+
     tfoot td{
         font-size: 1rem;
     }
@@ -80,6 +88,9 @@ footer img{
         font-size: 0.8rem;
     }
     tbody td, span{
+        font-size: 0.7rem!important;
+    }
+    tr td{
         font-size: 0.7rem!important;
     }
 
@@ -114,6 +125,9 @@ footer img{
 
     tbody td, span{
         font-size: 0.9rem!important;
+    }
+    tr td{
+        font-size: 0.6rem!important;
     }
 
     tfoot td{
