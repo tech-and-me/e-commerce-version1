@@ -75,8 +75,8 @@ const generateProductsHtml = (displayList) => {
                     <p class="card-text px-2 fw-bold"><span>AUD  </span>${obj.unitPrice}</p>
                     <hr>
                         <div class="d-inline-flex align-items-center">
-                            <label for="quantiy" class="me-2">Quantity</label>
-                            <input type="number" name="quantity" min="1" class="form-control quantity" />
+                            <label for="quantiy" class="me-2 w-75">Quantity</label>
+                            <input type="number" name="quantity" min="1" class="form-control quantity w-25" />
                         </div>
                     </div>  
                 </div>
