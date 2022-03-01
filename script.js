@@ -72,10 +72,10 @@ const generateProductsHtml = (displayList) => {
                     <img src=${obj.productImg} class="card-img-top" alt="...">
                     <div class="card-body">
                     <h5 class="card-title">${obj.productName}</h5>
-                    <p class="card-text px-3 fw-bold"><span>AUD  </span>${obj.unitPrice}</p>
+                    <p class="card-text px-2 fw-bold"><span>AUD  </span>${obj.unitPrice}</p>
                     <hr>
                         <div class="d-inline-flex align-items-center">
-                            <label for="quantiy" class="me-3">Quantity</label>
+                            <label for="quantiy" class="me-2">Quantity</label>
                             <input type="number" name="quantity" min="1" class="form-control quantity" />
                         </div>
                     </div>  

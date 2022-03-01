@@ -2,16 +2,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@400;500;800&display=swap');
 
 
+*{
+    margin:0 ;
+    padding: 0;
+    overflow-x: hidden!important;
+}
+
 body{
     font-family: 'Orbitron', sans-serif;
+    min-width: 100%!important;
 }
 
 .section1{
     min-height: 80vh;
 }
 
-.section1 .title-div,.order-details {
+.section1 .title-div{
     background-color: rgb(102, 96, 96)!important;
+}
+
+h2{
+    font-size:1.6rem ;
 }
 
 .center{
@@ -72,10 +83,18 @@ footer img{
         font-size: 0.7rem!important;
     }
 
-    
-
     tfoot td{
         font-size: 0.7rem;
+    }
+
+
+    h2{
+        font-size: 1.2rem;
+    }
+
+    
+    .btn{
+        font-size: smaller;
     }
 
 } 
@@ -94,11 +113,52 @@ footer img{
     }
 
     tbody td, span{
-        font-size: 0.6rem!important;
+        font-size: 0.5rem!important;
     }
 
     tfoot td{
         font-size: 0.7rem;
     }
 
+    h2{
+        font-size: 1rem;
+    }
+
+    .btn{
+        font-size: smaller;
+    }
+
+}
+
+
+@media (max-width: 560px){
+    form img{
+        height: 250px!important;
+    }
+    .card-title{
+        font-size:1rem;
+    }
+
+    th{
+        font-size: 0.5rem;
+    }
+
+    label{
+        font-size: 0.5rem;
+    }
+
+    input{
+        font-size: smaller;
+    }
+
+    h2{
+        font-size: 1rem;
+    }
+
+    .btn{
+        font-size: smaller;
+    }
+
+
+   
 }
