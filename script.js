@@ -76,7 +76,7 @@ const generateProductsHtml = (displayList) => {
                     <hr>
                         <div class="d-inline-flex align-items-center">
                             <label for="quantiy" class="me-3">Quantity</label>
-                            <input type="number" name="quantity" class="form-control quantity" />
+                            <input type="number" name="quantity" min="1" class="form-control quantity" />
                         </div>
                     </div>  
                 </div>
@@ -97,7 +97,7 @@ const handleAddToBasket = () => {
 //  1. Adding products to basket
     quantityElms.forEach((qtyElm,index) => {
         
-        if (qtyElm.value >0 && qtyElm.value != null){
+        if (qtyElm.value >0){
             let obj = {
                 productID: productArray[index].productID,
                 productName:productArray[index].productName,
@@ -105,7 +105,6 @@ const handleAddToBasket = () => {
                 productPrice : +productArray[index].unitPrice,
                 amount : 0
             }
-
             basket.push(obj);
             
         } 
@@ -174,8 +173,14 @@ const deleteProductOrdered = (index) => {
 const editProductOrdered = (index) => {
     let qty = prompt("Enter the new qty here: ");
     qty = Number(qty);
-    basket[index].productQuantity = qty;
+    if (qty >=1){
+        basket[index].productQuantity = qty;
     renderOrderDetails(generateProductOrderedHtml(basket));
+    }else{
+        alert("Qty cannot be lessor than 1. Pls try again.")
+        editProductOrdered(index);
+    }
+    
 } 
 
 // ******************************Invoke Functions *****************************

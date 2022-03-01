@@ -10,7 +10,7 @@ body{
     min-height: 80vh;
 }
 
-.section1 .title-div{
+.section1 .title-div,.order-details {
     background-color: rgb(102, 96, 96)!important;
 }
 
@@ -27,6 +27,11 @@ form img{
 
 th{
     font-weight: lighter;
+}
+
+footer img{
+    width: 50%;
+    max-width: 60px;
 }
 
 /* media query  */
