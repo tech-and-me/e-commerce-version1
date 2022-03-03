@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@400;500;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
 
 
 *{
@@ -13,8 +14,8 @@ body{
     min-width: 100%!important;
 }
 
-tr td{
-    font-size: 0.8rem!important;
+tr td, tr span{
+    font-size: 1.3rem!important;
 }
 
 .section1{
@@ -39,9 +40,25 @@ form img{
     border: solid 1px;
 }
 
+table{
+    font-family: 'Kanit', sans-serif;
+}
 
 th{
-    font-weight: lighter;
+    font-weight: bold;
+    font-size: 1.2rem;
+    
+}
+
+tfoot td{
+    font-size: 1.2rem;
+    /* font-weight: ; */
+}
+
+.text-danger{
+    /* background-color: rgb(201, 58, 58)!important; */
+    color: rgb(255, 10, 10)!important;
+    font-size: 1.6rem!important;
 }
 
 footer img{
@@ -57,19 +74,14 @@ footer img{
     }
 
     th{
-        font-size: 0.7rem;
+        font-size: 0.9rem;
     }
     .card-title{
         font-size: 0.9rem;
     }
 
-
-    tbody td, span{
-        font-size: 0.8rem;
-    }
-
-    tr td{
-        font-size: 0.7rem!important;
+    tr td, tr span{
+        font-size: 1.1rem!important;
     }
 
     tfoot td{
@@ -87,15 +99,13 @@ footer img{
     th{
         font-size: 0.8rem;
     }
-    tbody td, span{
-        font-size: 0.7rem!important;
-    }
-    tr td{
-        font-size: 0.7rem!important;
+ 
+    tr td, tr span{
+        font-size: 1.1rem!important;
     }
 
     tfoot td{
-        font-size: 0.7rem;
+        font-size: 1rem;
     }
 
 
@@ -123,15 +133,13 @@ footer img{
         font-size: 0.8rem;
     }
 
-    tbody td, span{
-        font-size: 0.9rem!important;
-    }
-    tr td{
-        font-size: 0.6rem!important;
+ 
+    tr td, tr span{
+        font-size: 1rem!important;
     }
 
     tfoot td{
-        font-size: 0.7rem;
+        font-size: 1.1rem;
     }
 
     h2{

@@ -64,7 +64,6 @@ let basket = [];
 // let totalAmount = 0;
 
 // ******************************* Functions *****************************
-
 const renderProductList = (productArray) => {
     let htmlElements="";
     productArray.forEach(obj => {
@@ -78,7 +77,7 @@ const renderProductList = (productArray) => {
                     <hr>
                         <div class="d-inline-flex align-items-center">
                             <label for="quantiy" class="me-2 w-75">Quantity</label>
-                            <input type="number" name="quantity" min="1" class="form-control quantity w-25" />
+                            <input type="number" name="quantity" min="1" class="form-control quantity w-50" />
                         </div>
                     </div>  
                 </div>
@@ -94,8 +93,7 @@ const handleAddToBasket = () => {
 
     //  1. Adding products to basket
     const quantityElms = document.querySelectorAll(".quantity");
-    quantityElms.forEach((qtyElm,index) => {
-        
+    quantityElms.forEach((qtyElm,index) => {      
         if (qtyElm.value >0){
             let obj = {
                 productID: productArray[index].productID,
@@ -150,7 +148,7 @@ const renderOrderDetails = () => {
                             <span class="text-danger remove px-2 " onclick="deleteProductOrdered(${index})">
                             <i class="fa-solid fa-trash-can "></i>
                             </span>
-                            <span class="text-danger edit" onclick="editProductOrdered(${index})" ><i class="fa-solid fa-pencil"></i></span>                
+                            <span class="text-danger edit px-2" onclick="editProductOrdered(${index})" ><i class="fa-solid fa-pencil"></i></span>                
                         </td>
                     </tr>
                 `         
@@ -160,7 +158,6 @@ const renderOrderDetails = () => {
     document.getElementById("tbody").innerHTML = productsOrderedHtml;
     document.getElementById("total").innerHTML = totalAmount;
 }
-
 
 // ***********************Handle when product deleted***********************
 // note: code for invoke this function is attached with OnClick 
