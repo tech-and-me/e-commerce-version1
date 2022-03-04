@@ -175,8 +175,8 @@ const renderOrderDetails = () => {
                     <tr id="${basketObj.id}">
                         <td class="align-middle">${basketObj.productName.split(" ")[0]}</td>
                         <td class="align-middle">${basketObj.productQuantity}</td>
-                        <td class="align-middle"><span>$</span>${(basketObj.unitPrice).toLocaleString('en-US')}</td>
-                        <td class="align-middle"><span>$</span>${(basketObj.amount).toLocaleString('en-US')}</td>
+                        <td class="align-middle right"><span>AUD </span>${(basketObj.unitPrice).toLocaleString('en-US')}</td>
+                        <td class="align-middle"><span>AUD </span>${(basketObj.amount).toLocaleString('en-US')}</td>
                         <td colspan="2" class="align-middle">
                             <span class="text-danger remove px-2 " onclick="deleteProductOrdered(${index})">
                             <i class="fa-solid fa-trash-can "></i>
