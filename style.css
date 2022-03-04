@@ -51,12 +51,12 @@ th{
 }
 
 tfoot td{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     /* font-weight: ; */
+    background-color: rgb(60, 61, 59)!important;
 }
 
 .text-danger{
-    /* background-color: rgb(201, 58, 58)!important; */
     color: rgb(255, 10, 10)!important;
     font-size: 1.6rem!important;
 }
@@ -150,6 +150,10 @@ footer img{
         font-size: smaller;
     }
 
+    .text-danger{
+        font-size: 1.2rem!important;
+    }
+
 }
 
 
@@ -179,6 +183,10 @@ footer img{
 
     .btn{
         font-size: smaller;
+    }
+
+    .text-danger{
+        font-size: 1rem!important;
     }
 
 

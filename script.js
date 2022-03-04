@@ -69,7 +69,7 @@ const renderProductList = (productArray) => {
     productArray.forEach(obj => {
     htmlElements += `
                 <div class= "col col-12 col-sm-6 col-md-4 col-lg-3 gy-5 card-item text-center">
-                <div class="card" id=${obj.productID}>
+                <div class="card">
                     <img src=${obj.productImg} class="card-img-top" alt="...">
                     <div class="card-body">
                     <h5 class="card-title">${obj.productName}</h5>
@@ -89,23 +89,51 @@ const renderProductList = (productArray) => {
 }
 
 // ***********************Handle when added to basket clicked ***********************
+// const uniqueBasket = [...new Set()];
+
 const handleAddToBasket = () => {
 
+   
     //  1. Adding products to basket
     const quantityElms = document.querySelectorAll(".quantity");
-    quantityElms.forEach((qtyElm,index) => {      
+    quantityElms.forEach((qtyElm,index) => {    
+        // any product card that quantity is not empty, we will do the following.  
         if (qtyElm.value >0){
-            let obj = {
-                productID: productArray[index].productID,
-                productName:productArray[index].productName,
-                productQuantity:+qtyElm.value,
-                unitPrice : +productArray[index].unitPrice,
-                amount : 0
-            }
-            basket.push(obj);
+            // Grab all info of the product and add it to a new object
+                let obj = {
+                    productID: productArray[index].productID,
+                    productName:productArray[index].productName,
+                    productQuantity:+qtyElm.value,
+                    unitPrice : +productArray[index].unitPrice,
+                    amount : 0
+                }
             
-        } 
-    });
+            // If the basket is empty, push the new object to the basket
+                if(basket.length===0){
+                    basket.push(obj);
+                }
+                
+            // if the basket is not empty, need to check first if the item already exist before pushing the new object    
+                else{
+                    let found = false;  // at this stage, assume that it is not found
+                    // and then goes through the whole basket if contain item with the same name
+                    // if it is, then update the found value to true and the increase the quality as well
+                    basket.forEach(basketItem => {
+                        if(basketItem.productName === obj.productName){
+                            found = true;
+                            basketItem.productQuantity += +qtyElm.value;
+                        }
+                    });
+
+                    // if after run through whole loop of basket and still not found, then push the object to the basket
+                    if (!found){
+                        basket.push(obj);
+                    }
+                }
+
+            } // end of if qty is greater than zero
+        });  // end of looping the whole card
+
 
 // 4. invoke render function
     renderOrderDetails(); 
@@ -115,17 +143,22 @@ const handleAddToBasket = () => {
     inputFields.forEach(element => {
         element.value = null;   
     });
+
 }
+
 
 
 // ***********************Render order details***********************
 const renderOrderDetails = () => {
-
     // Note: I choose to include calculate amount codes here so that everytime this method is called, the amount would be updated even when delete or edit products. 
+     
+
+
 
     //  1. calculate total amount of each product ordered 
     basket.map((basketObj,index)=>{
         basketObj.amount = basketObj.productQuantity * basketObj.unitPrice;
+        
     })
 
     // 2. calculate total amount of the whole basket    
@@ -140,11 +173,11 @@ const renderOrderDetails = () => {
         productsOrderedHtml +=    
                 `
                     <tr id="${basketObj.id}">
-                        <td>${basketObj.productName.split(" ")[0]}</td>
-                        <td>${basketObj.productQuantity}</td>
-                        <td><span>$</span>${basketObj.unitPrice}</td>
-                        <td><span>$</span>${basketObj.amount}</td>
-                        <td colspan="2">
+                        <td class="align-middle">${basketObj.productName.split(" ")[0]}</td>
+                        <td class="align-middle">${basketObj.productQuantity}</td>
+                        <td class="align-middle"><span>$</span>${(basketObj.unitPrice).toLocaleString('en-US')}</td>
+                        <td class="align-middle"><span>$</span>${(basketObj.amount).toLocaleString('en-US')}</td>
+                        <td colspan="2" class="align-middle">
                             <span class="text-danger remove px-2 " onclick="deleteProductOrdered(${index})">
                             <i class="fa-solid fa-trash-can "></i>
                             </span>
@@ -156,7 +189,7 @@ const renderOrderDetails = () => {
 
     //4. render order details 
     document.getElementById("tbody").innerHTML = productsOrderedHtml;
-    document.getElementById("total").innerHTML = totalAmount;
+    document.getElementById("total").innerHTML = totalAmount.toLocaleString('en-US');
 }
 
 // ***********************Handle when product deleted***********************
