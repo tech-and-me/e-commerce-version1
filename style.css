@@ -62,10 +62,28 @@ tfoot td{
     font-size: 1.6rem!important;
 }
 
-footer img{
-    width: 50%;
-    max-width: 60px;
+
+footer{
+    font-family: 'Kanit', sans-serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    
+
 }
+
+footer div{
+    background-color: rgb(31, 32, 29);
+    border-top: 0.5px grey solid;
+    color: rgb(151, 145, 137)!important;
+}
+footer img{
+    width: 30%;
+    max-width: 45px;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+
 
 /* media query  */
 
@@ -131,12 +149,12 @@ footer img{
     }
 
     th{
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
  
     tr td, tr span{
-        font-size: 1rem!important;
+        font-size: 0.8rem!important;
     }
 
     tfoot td{
@@ -152,7 +170,7 @@ footer img{
     }
 
     .text-danger{
-        font-size: 1.2rem!important;
+        font-size: 1rem!important;
     }
 
 }
@@ -167,7 +185,7 @@ footer img{
     }
 
     th{
-        font-size: 0.5rem;
+        font-size: 0.7rem;
     }
 
     label{
@@ -185,11 +203,16 @@ footer img{
     .btn{
         font-size: smaller;
     }
-
-    .text-danger{
-        font-size: 1rem!important;
+    tr td, tr span{
+        font-size: 0.75rem!important;
     }
 
+    .text-danger{
+        font-size: 0.9rem!important;
+    }
 
+    footer{
+        font-size: smaller;
+    }
    
 }
