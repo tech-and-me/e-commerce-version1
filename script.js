@@ -174,7 +174,7 @@ const renderOrderDetails = () => {
                 `
                     <tr id="${basketObj.id}">
                         <td class="align-middle">${basketObj.productName.split(" ")[0]}</td>
-                        <td class="align-middle">${basketObj.productQuantity}</td>
+                        <td class="align-middle" id=${index}> ${basketObj.productQuantity}</td>
                         <td class="align-middle right"><span> </span>${(basketObj.unitPrice).toLocaleString('en-US')}</td>
                         <td class="align-middle"><span> </span>${(basketObj.amount).toLocaleString('en-US')}</td>
                         <td colspan="2" class="align-middle">
@@ -202,15 +202,20 @@ const deleteProductOrdered = (index) => {
 // ***********************Handle when product edited***********************
 // note: code for invoke this function is attached with OnClick 
 const editProductOrdered = (index) => {
-    let qty = prompt("Enter the new qty here: ");
-    qty = Number(qty);
-    if (qty >=1){
+    const elmToEdit = document.getElementById(index);
+    elmToEdit.setAttribute("contentEditable",true);
+    elmToEdit.focus();
+    elmToEdit.addEventListener("focusout", () => {
+        let qty = +(elmToEdit.textContent);
+        if (qty <1 || isNaN(qty)){        
+            alert("Invalid qty enteted. Default qty of 1 is set instead.");
+            qty = 1;
+        }
         basket[index].productQuantity = qty;
-    renderOrderDetails();
-    }else{
-        alert("Qty cannot be lessor than 1. Pls try again.")
-        editProductOrdered(index);
-    }    
+        elmToEdit.removeAttribute("contenteditable");
+        renderOrderDetails();
+    });
+
 } 
 
 // ******************************Invoke Functions *****************************
