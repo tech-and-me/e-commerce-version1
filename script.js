@@ -208,7 +208,7 @@ const editProductOrdered = (index) => {
     const selection = window.getSelection();
     //create an empty range object on DOM so that we can use it to set position of the cursor later
     const range = document.createRange();
-    //remove any existing range on any selection
+    // remove any existing range on any selection
     selection.removeAllRanges();
     //select the element to edit to apply range object to
     range.selectNodeContents(elmToEdit);
@@ -219,17 +219,24 @@ const editProductOrdered = (index) => {
     //set cursor to the element to edit
     elmToEdit.focus();
 
-    elmToEdit.addEventListener("focusout", () => {
-        let qty = +(elmToEdit.textContent);
-        if (qty <1 || isNaN(qty)){        
-            alert("Invalid qty enteted. Default qty of 1 is set instead.");
-            qty = 1;
+    elmToEdit.addEventListener("keydown", () => {
+        //some browser use event.which , some use event.keyCode. Hence, use || to apply to both options.
+        let code = event.which || event.keyCode;
+        if(code === 9 || code === 13)
+        {
+            let qty = +(elmToEdit.textContent);
+            if (qty <1 || isNaN(qty)){        
+                alert("Invalid qty enteted. Default qty of 1 is set instead.");
+                qty = 1;
+            }
+            basket[index].productQuantity = qty;
+            elmToEdit.removeAttribute("contenteditable");
+            renderOrderDetails();
         }
-        basket[index].productQuantity = qty;
-        elmToEdit.removeAttribute("contenteditable");
-        renderOrderDetails();
+        
     });
 
+    
 } 
 
 // ******************************Invoke Functions *****************************
