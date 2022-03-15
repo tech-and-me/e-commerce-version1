@@ -204,17 +204,19 @@ const deleteProductOrdered = (index) => {
 const editProductOrdered = (index) => {
     const elmToEdit = document.getElementById(index);
     elmToEdit.setAttribute("contentEditable",true);
-    //create a selection
+    //To get the current selection
     const selection = window.getSelection();
-    //create a selection range
+    //create an empty range object on DOM so that we can use it to set position of the cursor later
     const range = document.createRange();
-    //remove any existing selection
+    //remove any existing range on any selection
     selection.removeAllRanges();
-    //appy selection to the element to edit
+    //select the element to edit to apply range object to
     range.selectNodeContents(elmToEdit);
+    //set position of range to end of the content of current selection
     range.collapse(false);
-    //select the content
+    //apply range to the current element selected
     selection.addRange(range);
+    //set cursor to the element to edit
     elmToEdit.focus();
 
     elmToEdit.addEventListener("focusout", () => {
