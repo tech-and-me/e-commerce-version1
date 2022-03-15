@@ -204,14 +204,19 @@ const deleteProductOrdered = (index) => {
 const editProductOrdered = (index) => {
     const elmToEdit = document.getElementById(index);
     elmToEdit.setAttribute("contentEditable",true);
-    //put cursor in the editable element
+    //create a selection
+    const selection = window.getSelection();
+    //create a selection range
+    const range = document.createRange();
+    //remove any existing selection
+    selection.removeAllRanges();
+    //appy selection to the element to edit
+    range.selectNodeContents(elmToEdit);
+    range.collapse(false);
+    //select the content
+    selection.addRange(range);
     elmToEdit.focus();
-    //select all content of the editable element
-    document.execCommand('selectAll', false, null);
-    //set cursor to the the end of the content
-    document.getSelection().collapseToEnd();
 
-    // cursorManager.setEndOfContenteditable(elmToEdit);
     elmToEdit.addEventListener("focusout", () => {
         let qty = +(elmToEdit.textContent);
         if (qty <1 || isNaN(qty)){        
